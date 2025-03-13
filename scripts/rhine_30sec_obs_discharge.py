@@ -15,8 +15,8 @@ pcr.setclone(cloneMap)
 cloneMap = pcr.boolean(1.0)
 
 # latitudes and longitudes
-latitudes  = np.unique(pcr.pcr2numpy(pcr.ycoordinate(cloneMap), vos.MV))[::-1]
-longitudes = np.unique(pcr.pcr2numpy(pcr.xcoordinate(cloneMap), vos.MV))
+latitudes  = np.unique(pcr.pcr2numpy(pcr.ycoordinate(cloneMap), 1e20))[::-1]
+longitudes = np.unique(pcr.pcr2numpy(pcr.xcoordinate(cloneMap), 1e20))
 
 # netcdf format and zlib setup 
 format = 'NETCDF3_CLASSIC'
