@@ -82,8 +82,8 @@ rootgrp.close()
 # assign the time variables based on the length of grdc file
 rootgrp = nc.Dataset(ncFileName,  'a')
 datetime_base =  datetime.datetime(1990, 1, 1,0)
-# ~ datetime_last =  datetime.datetime(2010,12,31,0)
-datetime_last =  datetime.datetime(1990, 1,31,0)
+datetime_last =  datetime.datetime(2010,12,31,0)
+# ~ datetime_last =  datetime.datetime(1990, 1,31,0)
 num_of_days   = (datetime_last - datetime_base).days + 1
 datetime_list = [datetime_base + datetime.timedelta(days = x) for x in range(num_of_days)]
 print(datetime_list)
@@ -95,8 +95,8 @@ rootgrp.close()
 # assign discharge values from a station
 #
 # step 1: read GRDC nc discharge file (note the grdc discharge file must contain only the dates 1 Jan 1990 to 31 Dec 2010, e.g. using: "cdo selyear,1990/2010 input.nc output.nc")
-# ~ grdc_discharge_file = "/home/edwin/github/edwinkost/create_netcdf/example_data/basel_daily_1990-2010.nc" 
-grdc_discharge_file = "/home/edwin/github/edwinkost/create_netcdf/example_data/basel_daily_1990-01.nc" 
+grdc_discharge_file = "/home/edwin/github/edwinkost/create_netcdf/example_data/basel_daily_1990-2010.nc" 
+# ~ grdc_discharge_file = "/home/edwin/github/edwinkost/create_netcdf/example_data/basel_daily_1990-01.nc" 
 grdc_data        = nc.Dataset(grdc_discharge_file)
 grdc_time_series = np.array(grdc_data.variables["runoff_mean"][:])
 print(grdc_time_series)
@@ -117,11 +117,11 @@ rootgrp.close()
 
 
 
-# dummy discharge values from a station
-rootgrp = nc.Dataset(ncFileName,  'a')
-i_lon = 31
-i_lat = 31
-print(i_lat, i_lon)
-rootgrp.variables[shortVarName][:,i_lat,i_lon] = grdc_time_series * 5.
-rootgrp.sync()
-rootgrp.close()
+# ~ # dummy discharge values from a station
+# ~ rootgrp = nc.Dataset(ncFileName,  'a')
+# ~ i_lon = 31
+# ~ i_lat = 31
+# ~ print(i_lat, i_lon)
+# ~ rootgrp.variables[shortVarName][:,i_lat,i_lon] = grdc_time_series * 5.
+# ~ rootgrp.sync()
+# ~ rootgrp.close()
