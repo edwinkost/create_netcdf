@@ -86,14 +86,6 @@ grdc_discharge_file = "/home/edwin/github/edwinkost/create_netcdf/example_data/b
 grdc_data        = nc.Dataset(grdc_discharge_file)
 grdc_time_series = np.array(grdc_data.variables["runoff_mean"][:])
 #
-# step 2: assign the time variables based on the length of grdc file
-rootgrp = nc.Dataset(ncFileName,  'a')
-datetime_base =  datetime.datetime(1990,1,1,0)
-datetime_list = [datetime_base + datetime.timedelta(days = x) for x in range(len(grdc_time_series))]
-rootgrp.variables["time"] = nc.date2num(datetime_list, date_time.units)
-rootgrp.sync()
-rootgrp.close()
-#
 # step 3: assign grdc_time_series to our netcdf file
 rootgrp = nc.Dataset(ncFileName,  'a')
 # - indices for latitude and longitude
@@ -107,3 +99,12 @@ print(i_lat, i_lon)
 rootgrp.variables[shortVarName][:,i_lat,i_lon] = grdc_time_series
 rootgrp.sync()
 rootgrp.close()
+#
+# step 2: assign the time variables based on the length of grdc file
+rootgrp = nc.Dataset(ncFileName,  'a')
+datetime_base =  datetime.datetime(1990,1,1,0)
+datetime_list = [datetime_base + datetime.timedelta(days = x) for x in range(len(grdc_time_series))]
+rootgrp.variables["time"] = nc.date2num(datetime_list, date_time.units)
+rootgrp.sync()
+rootgrp.close()
+#
