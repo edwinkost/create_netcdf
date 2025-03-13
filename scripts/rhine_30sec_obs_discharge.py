@@ -84,7 +84,7 @@ rootgrp.close()
 # step 1: read GRDC nc discharge file (note the grdc discharge file must contain only the dates 1 Jan 1990 to 31 Dec 2010, e.g. using: "cdo selyear,1990/2010 input.nc output.nc")
 grdc_discharge_file = "/home/edwin/github/edwinkost/create_netcdf/example_data/basel_daily_1990-01.nc" 
 grdc_data        = nc.Dataset(grdc_discharge_file)
-grdc_time_series = np.asarray(np.array(grdc_data.variables["runoff_mean"][:])).tolist*(
+grdc_time_series = np.asarray(np.array(grdc_data.variables["runoff_mean"][:])).tolist()
 print(grdc_time_series)
 #
 # step 2: assign the time variables based on the length of grdc file
