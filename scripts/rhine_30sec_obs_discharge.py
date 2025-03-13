@@ -104,7 +104,7 @@ rootgrp.close()
 rootgrp = nc.Dataset(ncFileName,  'a')
 datetime_base =  datetime.datetime(1990,1,1,0)
 datetime_list = [datetime_base + datetime.timedelta(days = x) for x in range(len(grdc_time_series))]
-rootgrp.variables["time"] = nc.date2num(datetime_list, date_time.units)
+rootgrp.variables["time"] = nc.date2num(datetime_list, rootgrp.variables["time"].units)
 print(rootgrp.variables["time"])
 rootgrp.sync()
 rootgrp.close()
