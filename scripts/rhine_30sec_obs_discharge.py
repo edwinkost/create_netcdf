@@ -35,7 +35,7 @@ attributeDictionary['description'] = "GRDC daily observation data mapped at 30se
 rootgrp = nc.Dataset(ncFileName, 'w', format = format)
 
 # create dimensions - time is unlimited, others are fixed
-rootgrp.createDimension('time', 31)
+rootgrp.createDimension('time', None)
 rootgrp.createDimension('lat', len(latitudes))
 rootgrp.createDimension('lon', len(longitudes))
 
@@ -84,7 +84,6 @@ rootgrp.close()
 # step 1: read GRDC nc discharge file (note the grdc discharge file must contain only the dates 1 Jan 1990 to 31 Dec 2010, e.g. using: "cdo selyear,1990/2010 input.nc output.nc")
 grdc_discharge_file = "/home/edwin/github/edwinkost/create_netcdf/example_data/basel_daily_1990-01.nc" 
 grdc_data        = nc.Dataset(grdc_discharge_file)
-# ~ grdc_time_series = np.asarray(np.array(grdc_data.variables["runoff_mean"][:])).tolist()
 grdc_time_series = np.array(grdc_data.variables["runoff_mean"][:])
 print(grdc_time_series)
 #
