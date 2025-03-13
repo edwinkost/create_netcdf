@@ -85,6 +85,7 @@ rootgrp.close()
 grdc_discharge_file = "/home/edwin/github/edwinkost/create_netcdf/example_data/basel_daily_1990-01.nc" 
 grdc_data        = nc.Dataset(grdc_discharge_file)
 grdc_time_series = np.array(grdc_data.variables["runoff_mean"][:])
+print(grdc_time_series)
 #
 # step 2: assign the time variables based on the length of grdc file
 rootgrp = nc.Dataset(ncFileName,  'a')
