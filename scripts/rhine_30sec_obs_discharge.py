@@ -86,19 +86,19 @@ grdc_discharge_file = "/home/edwin/github/edwinkost/create_netcdf/example_data/b
 grdc_data        = nc.Dataset(grdc_discharge_file)
 grdc_time_series = np.array(grdc_data.variables["runoff_mean"][:])
 #
-# step 3: assign grdc_time_series to our netcdf file
-rootgrp = nc.Dataset(ncFileName,  'a')
-# - indices for latitude and longitude
-station_latitude  = 47.5538
-station_longitude = 7.6131
-minX  = min(abs(rootgrp.variables['lon'][:] - station_longitude))  # ; print(minX)
-i_lon = int(np.where(abs(rootgrp.variables['lon'][:] - station_longitude) == minX)[0])
-minY  = min(abs(rootgrp.variables['lat'][:] - station_latitude)) # ; print(minY)
-i_lat = int(np.where(abs(rootgrp.variables['lat'][:] - station_latitude) == minY)[0])
-print(i_lat, i_lon)
-rootgrp.variables[shortVarName][:,i_lat,i_lon] = grdc_time_series
-rootgrp.sync()
-rootgrp.close()
+# ~ # step 3: assign grdc_time_series to our netcdf file
+# ~ rootgrp = nc.Dataset(ncFileName,  'a')
+# ~ # - indices for latitude and longitude
+# ~ station_latitude  = 47.5538
+# ~ station_longitude = 7.6131
+# ~ minX  = min(abs(rootgrp.variables['lon'][:] - station_longitude))  # ; print(minX)
+# ~ i_lon = int(np.where(abs(rootgrp.variables['lon'][:] - station_longitude) == minX)[0])
+# ~ minY  = min(abs(rootgrp.variables['lat'][:] - station_latitude)) # ; print(minY)
+# ~ i_lat = int(np.where(abs(rootgrp.variables['lat'][:] - station_latitude) == minY)[0])
+# ~ print(i_lat, i_lon)
+# ~ rootgrp.variables[shortVarName][:,i_lat,i_lon] = grdc_time_series
+# ~ rootgrp.sync()
+# ~ rootgrp.close()
 #
 # step 2: assign the time variables based on the length of grdc file
 rootgrp = nc.Dataset(ncFileName,  'a')
