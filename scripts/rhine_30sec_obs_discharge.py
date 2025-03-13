@@ -35,7 +35,7 @@ attributeDictionary['description'] = "GRDC daily observation data mapped at 30se
 rootgrp = nc.Dataset(ncFileName, 'w', format = format)
 
 # create dimensions - time is unlimited, others are fixed
-rootgrp.createDimension('time', None)
+rootgrp.createDimension('time', 31)
 rootgrp.createDimension('lat', len(latitudes))
 rootgrp.createDimension('lon', len(longitudes))
 
