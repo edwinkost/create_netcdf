@@ -92,7 +92,7 @@ rootgrp = nc.Dataset(ncFileName,  'a')
 datetime_base =  datetime.datetime(1990,1,1,0)
 datetime_list = [datetime_base + datetime.timedelta(days = x) for x in range(len(grdc_time_series))]
 print(datetime_list)
-rootgrp.variables["time"] = nc.date2num(datetime_list, rootgrp.variables["time"].units)
+rootgrp.variables["time"] = nc.date2num(datetime_list, rootgrp.variables["time"].units, rootgrp.variables["time"].calendar)
 print(rootgrp.variables["time"])
 rootgrp.sync()
 rootgrp.close()
@@ -108,6 +108,6 @@ i_lon = int(np.where(abs(rootgrp.variables['lon'][:] - station_longitude) == min
 minY  = min(abs(rootgrp.variables['lat'][:] - station_latitude)) # ; print(minY)
 i_lat = int(np.where(abs(rootgrp.variables['lat'][:] - station_latitude) == minY)[0])
 print(i_lat, i_lon)
-rootgrp.variables[shortVarName][:][i_lat,i_lon] = grdc_time_series
+rootgrp.variables[shortVarName][:,i_lat,i_lon] = grdc_time_series
 rootgrp.sync()
 rootgrp.close()
