@@ -108,6 +108,6 @@ i_lon = int(np.where(abs(rootgrp.variables['lon'][:] - station_longitude) == min
 minY  = min(abs(rootgrp.variables['lat'][:] - station_latitude)) # ; print(minY)
 i_lat = int(np.where(abs(rootgrp.variables['lat'][:] - station_latitude) == minY)[0])
 print(i_lat, i_lon)
-rootgrp.variables[shortVarName][:,i_lat,i_lon] = grdc_time_series
+rootgrp.variables[shortVarName][:][i_lat,i_lon] = grdc_time_series
 rootgrp.sync()
 rootgrp.close()
