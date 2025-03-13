@@ -1,11 +1,15 @@
-
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import pcraster as pcr
 import netCDF4 as nc
 import numpy as np
 
-cloneMap   = 
-ncFileName = 
+# clonemap
+cloneMap   = "/projects/0/dfguu/users/edwin/data/pcrglobwb_input_arise/develop/global_30sec/cloneMaps/RhineMeuse30sec.clone.map" 
+
+# output netcdf file
+ncFileName = "test.nc"
 
 pcr.setclone(cloneMap)
 cloneMap = pcr.boolean(1.0)
@@ -76,17 +80,19 @@ rootgrp.close()
 # assign discharge values from a station
 #
 # step 1: read GRDC nc discharge file (note the grdc discharge file must contain only the dates 1 Jan 1990 to 31 Dec 2010, e.g. using: "cdo selyear,1990/2010 input.nc output.nc")
-grdc_discharge_file = 
+grdc_discharge_file = "/home/edwin/github/edwinkost/create_netcdf/example_data/basel_daily_1990-2010.nc" 
 grdc_data        = nc.Dataset(grdc_discharge_file)
 grdc_time_series = np.array(grdc_data.variables["runoff_mean"][:])
 #
 # step2: assign grdc_time_series to our netcdf file
 rootgrp = nc.Dataset(ncFileName,  'a')
 # - indices for latitude and longitude
-i_lat = 30
-i_lon = 30
+station_latitude  = 47.5538
+station_longitude = 7.6131
+minX  = min(abs(rootgrp.variables['lon'][:] - station_longitude))  # ; print(minX)
+i_lon = int(np.where(abs(rootgrp.variables['lon'][:] - station_longitude) == minX)[0])
+minY  = min(abs(rootgrp.variables['lat'][:] - station_latitude)) # ; print(minY)
+i_lat = int(np.where(abs(f.variables['lat'][:] - station_latitude) == minY)[0])
 rootgrp.variables[shortVarName][:,i_lat,i_lon] = grdc_time_series
 rootgrp.sync()
 rootgrp.close()
-
-
