@@ -83,7 +83,7 @@ rootgrp.close()
 rootgrp = nc.Dataset(ncFileName,  'a')
 datetime_base =  datetime.datetime(1990, 1, 1,0)
 datetime_last =  datetime.datetime(2010,12,31,0)
-datetime_last =  datetime.datetime(1990, 1,31,0)
+# ~ datetime_last =  datetime.datetime(1990, 1,31,0)
 num_of_days   = (datetime_last - datetime_base).days + 1
 datetime_list = [datetime_base + datetime.timedelta(days = x) for x in range(num_of_days)]
 # ~ print(datetime_list)
@@ -97,7 +97,7 @@ rootgrp.close()
 #
 # step 1: read GRDC nc discharge file (note the grdc discharge file must contain only the dates 1 Jan 1990 to 31 Dec 2010, e.g. using: "cdo selyear,1990/2010 input.nc output.nc")
 grdc_discharge_file = "/home/edwin/github/edwinkost/create_netcdf/example_data/basel_daily_1990-2010.nc" 
-grdc_discharge_file = "/home/edwin/github/edwinkost/create_netcdf/example_data/basel_daily_1990-01.nc" 
+# ~ grdc_discharge_file = "/home/edwin/github/edwinkost/create_netcdf/example_data/basel_daily_1990-01.nc" 
 msg = "processing " + grdc_discharge_file
 print(msg)
 grdc_data        = nc.Dataset(grdc_discharge_file)
@@ -106,7 +106,7 @@ print(grdc_time_series)
 #
 # step 2: assign grdc_time_series to our netcdf file
 rootgrp = nc.Dataset(ncFileName,  'a')
-# - indices for latitude and longitude
+# - latitude and longitude
 station_latitude  = 47.5538
 station_longitude = 7.6131
 minX  = min(abs(rootgrp.variables['lon'][:] - station_longitude))  # ; print(minX)
