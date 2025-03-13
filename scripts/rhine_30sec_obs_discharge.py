@@ -82,7 +82,8 @@ rootgrp.close()
 # assign the time variables based on the length of grdc file
 rootgrp = nc.Dataset(ncFileName,  'a')
 datetime_base =  datetime.datetime(1990, 1, 1,0)
-datetime_last =  datetime.datetime(2010,12,31,0)
+# ~ datetime_last =  datetime.datetime(2010,12,31,0)
+datetime_last =  datetime.datetime(1990, 1,31,0)
 num_of_days   = (datetime_last - datetime_base).days + 1
 datetime_list = [datetime_base + datetime.timedelta(days = x) for x in range(num_of_days)]
 print(datetime_list)
